@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/insert.dart';
+import 'package:myapp/lista.dart';
 
 
 class Home extends StatelessWidget {
@@ -97,27 +98,7 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-       body: new Material(
-         borderRadius: new BorderRadius.circular(6.0),
-         elevation: 2.0,
-         child: new Row(
-           crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          //Adicionamos aqui FadeInImage que é uma variande do widget Image. Ela nos possibilita carregar image de uma URL
-          new Container (
-            width: 95.0,
-            child: Image.network('http://startupsdobrasil.com.br/wp-content/uploads/2017/09/desenvolvimento-de-um-produto-380x249.png'),
-          ),
-          
-          new Column(
-            crossAxisAlignment:CrossAxisAlignment.start,
-            children: <Widget>[
-              new Text('Produto'),
-              new Text('200 em estoque')],
-          )
-        ],
-         )
-       ),
+       body: NoticeList()
     );
   }
 }
