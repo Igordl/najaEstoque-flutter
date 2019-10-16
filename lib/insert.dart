@@ -45,16 +45,23 @@ class MyCustomFormState extends State<MyCustomForm> {
   //
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController valorController = TextEditingController();
+  TextEditingController imageController = TextEditingController();
+  TextEditingController quantidadeController = TextEditingController();
+
+  var _formKey = GlobalKey<FormState>();
 
   List _categorias =
   ["Categorias", "Celular", "Eletrodoméstico", "Tvs", "Videogame"];
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
   String _currentCategoria;
+
   getCurrentCategoria(){
     return this._currentCategoria;
   }
+  
   @override
   void initState() {
     _dropDownMenuItems = getDropDownMenuItems();
@@ -81,8 +88,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    SettingsWidget _categorias = new SettingsWidget();
-
+   
    return SingleChildScrollView(
         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Form(
@@ -98,7 +104,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 
                 
-                //controller: nomeController,
+                controller: nomeController,
                 validator: (nomeItem) {
                   if (nomeItem.isEmpty) {
                     return "Insira o Nome do Item!";
@@ -122,7 +128,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 decoration: InputDecoration(
                     labelText: "Valor do Item"),
                 
-                //controller: valorController,
+                controller: valorController,
                 validator: (valorItem) {
                   if (valorItem.isEmpty) {
                     return "Insira o Valor do Item!";
@@ -136,11 +142,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                 decoration: InputDecoration(
                     labelText: "Quantidade do Item",),
                 
-                //controller: quantidadeController,
+                controller: quantidadeController,
                 validator: (quantidadeItem) {
                   if (quantidadeItem.isEmpty) {
                     return "Insira o Quantidade do Item!";
-                  } else if (double.parse(quantidadeItem) <= 0) {
+                  } else if (double.parse(quantidadeItem) <= 0 || double.parse(quantidadeItem)%1.0 == 0 ) {
                     return "Insira uma Quantidade Valido!";
                   }
                 },
@@ -150,7 +156,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 decoration: InputDecoration(
                     labelText: "Link para Imagem do Item",),
                 
-               // controller: imageController,
+                controller: imageController,
                 validator: (imageItem) {
                   if (imageItem.isEmpty) {
                     return "Insira a Imagem do Item!";
@@ -171,82 +177,49 @@ class MyCustomFormState extends State<MyCustomForm> {
                 if (_currentCategoria == 'Categorias') {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Selecione uma categoria válida')));
+                  
                 } else {
                 
                 if (_formKey.currentState.validate()) {
                   // If the form is valid, display a Snackbar.
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Item adicionado com sucesso')));
-                 // Scaffold.of(context)
-                   //   .showSnackBar(SnackBar(content: Text('Adicionando item ao estoque')));
-                }}
-              },
-              child: Text('Adicionar'),
-            ),),
-          ]),
-            ],
-          ),
-        ),
-      );
-    
-  }
-}
 
-class SettingsWidget extends StatefulWidget {
-  SettingsWidget({Key key}) : super(key: key);
+                  _cadastraItem(nomeController,valorController,quantidadeController,imageController, _currentCategoria);
+                                    Scaffold.of(context)
+                                        .showSnackBar(SnackBar(content: Text('Item adicionado com sucesso')));
+                                        
+                                        
+                                   // Scaffold.of(context)
+                                     //   .showSnackBar(SnackBar(content: Text('Adicionando item ao estoque')));
+                                  }}
+                                },
+                                child: Text('Adicionar'),
+                              ),),
+                            ]),
+                              ],
+                            ),
+                          ),
+                        );
+                      
+                    }
+                    _resetFields() {
+                      nomeController.text = "";
+                      valorController.text = "";
+                      imageController.text = "";
+                      quantidadeController.text = "";
+                      setState(() {
+                        
+                        _formKey = GlobalKey<FormState>();
+                      });
+                    }
+                  
+                    _cadastraItem(TextEditingController nomeController, 
+                    TextEditingController valorController,
+                    TextEditingController quantidadeController, 
+                    TextEditingController imageController, 
+                    String currentCategoria) {
+                      /*
+                        POST PARA INSERÇÃO DE ITEM
 
-  @override
-  _SettingsWidgetState createState() => new _SettingsWidgetState();
-}
-
-class _SettingsWidgetState extends State<SettingsWidget> {
-
-  List _categorias =
-  ["Categorias", "Celular", "Eletrodoméstico", "Tvs", "Videogame"];
-
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
-  String _currentCategoria;
-  getCurrentCategoria(){
-    return this._currentCategoria;
-  }
-  @override
-  void initState() {
-    _dropDownMenuItems = getDropDownMenuItems();
-    _currentCategoria = _dropDownMenuItems[0].value;
-    super.initState();
-  }
-
-  List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> items = new List();
-    for (String categoria in _categorias) {
-      items.add(new DropdownMenuItem(
-          value: categoria,
-          child: new Text(categoria)
-      ));
-    }
-    return items;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-          child: new Column(
-            children: <Widget>[
-              new DropdownButton(
-                value: _currentCategoria,
-                items: _dropDownMenuItems,
-                onChanged: changedDropDownItem,
-              )
-            ],
-          )
-      );
-  
-  }
-
-  void changedDropDownItem(String selectedCategoria) {
-    setState(() {
-      _currentCategoria = selectedCategoria;
-    });
-  }
-
+                      */
+                    }
 }
