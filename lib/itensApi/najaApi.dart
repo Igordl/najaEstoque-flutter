@@ -19,7 +19,7 @@ class Api {
     try {
       http.Response response = await http.get(url, headers: {
         HttpHeaders.authorizationHeader:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuYWphIiwic3ViIjoiNWQ5MjY0MmZjOWRhMTA1MDA0NmQ2YWZlIiwiaWF0IjoxNTcxMDgzNzg1NzM2LCJleHAiOjE1NzExNzAxODU3MzZ9.8AQMtS_GDb9PNUhRFoppVnxxeTKXO9mx7HonrdJ0juY"
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuYWphIiwic3ViIjoiNWQ5NTQzZDE3ZGU5ODcxYWZjM2U4YmUxIiwiaWF0IjoxNTcwMDYzMzEzNzYxLCJleHAiOjE1NzAxNDk3MTM3NjF9.1u7b-hwOlJvRPNrzOp1K1jz3EU2xXJApt_pEK4cJVPg"
       });
       const JsonDecoder decoder = const JsonDecoder();
       return decoder.convert(response.body);
@@ -33,7 +33,7 @@ class Api {
     try {
       await http.delete(url, headers: {
         HttpHeaders.authorizationHeader:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuYWphIiwic3ViIjoiNWQ5MjY0MmZjOWRhMTA1MDA0NmQ2YWZlIiwiaWF0IjoxNTcxMDgzNzg1NzM2LCJleHAiOjE1NzExNzAxODU3MzZ9.8AQMtS_GDb9PNUhRFoppVnxxeTKXO9mx7HonrdJ0juY"
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuYWphIiwic3ViIjoiNWQ5NTQzZDE3ZGU5ODcxYWZjM2U4YmUxIiwiaWF0IjoxNTcwMDYzMzEzNzYxLCJleHAiOjE1NzAxNDk3MTM3NjF9.1u7b-hwOlJvRPNrzOp1K1jz3EU2xXJApt_pEK4cJVPg"
       });
     } on Exception catch (_) {
       return null;
@@ -44,7 +44,7 @@ class Api {
       String category, String image) async {
     String url = 'https://api-naja.herokuapp.com/product';
     String token =
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuYWphIiwic3ViIjoiNWQ5MjY0MmZjOWRhMTA1MDA0NmQ2YWZlIiwiaWF0IjoxNTcxMDgzNzg1NzM2LCJleHAiOjE1NzExNzAxODU3MzZ9.8AQMtS_GDb9PNUhRFoppVnxxeTKXO9mx7HonrdJ0juY';
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuYWphIiwic3ViIjoiNWQ5NTQzZDE3ZGU5ODcxYWZjM2U4YmUxIiwiaWF0IjoxNTcwMDYzMzEzNzYxLCJleHAiOjE1NzAxNDk3MTM3NjF9.1u7b-hwOlJvRPNrzOp1K1jz3EU2xXJApt_pEK4cJVPg';
     Map product = {
       "name": name,
       "price": price,
